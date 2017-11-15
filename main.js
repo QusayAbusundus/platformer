@@ -18,6 +18,7 @@ function draw()
 {
 	background(0);
 	john.show();
+	john.move();
 	for(i = 0; i < platforms.length; i++)
 	{
 		platforms[i].show();
@@ -30,7 +31,7 @@ function draw()
 
 class Hero
 {
-	constructor(x, y, width, height)
+	constructor(x, y)
 	{
 		this.x = x;
 		this.y = y;
@@ -42,6 +43,22 @@ class Hero
 
 	move()
 	{
+		if(keyIsDown(LEFT_ARROW))
+		{
+			this.x -= 5;
+		}
+		else if(keyIsDown(RIGHT_ARROW))
+		{
+			this.x += 5;
+		}
+		if(keyIsDown(UP_ARROW))
+		{
+			this.y -= 5;
+		}
+		else if(keyIsDown(DOWN_ARROW))
+		{
+			this.y += 5;
+		}
 	}
 
 	show()
@@ -59,10 +76,6 @@ class Platform
 		this.y = y;
 		this.width = width;
 		this.height = 20;
-	}
-
-	move()
-	{
 	}
 
 	show()
