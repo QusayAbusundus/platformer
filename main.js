@@ -4,13 +4,13 @@ let score = 0;
 
 function setup()
 {
-	createCanvas(600, 400);
+	createCanvas(1000, 800);
 	john = new Hero(300, 185);
 	for(i = 0; i < 2; i++)
 	{
 		let x = 260;
 		let y = 190;
-		let width = 80;
+		let width = 200;
 		platforms[i] = new Platform(x, y, width);
 	}
 }

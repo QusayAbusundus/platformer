@@ -7,10 +7,10 @@ class Platform
 		this.width = width;
 		this.height = 20;
 	}
-	
+
 	contains(givenX, givenY)
 	{
-		return this.x > givenX && this.width < givenX && this.y > givenY && this.height < givenY;
+		return this.x > givenX && this.x + this.width < givenX && this.y > givenY && givenY < this.y + this. height;
 	}
 
 	show()
@@ -18,4 +18,4 @@ class Platform
 		fill(125);
 		rect(this.x, this.y, this.width, this.height);
 	}
-} 
+}

@@ -4,8 +4,8 @@ class Hero
 	{
 		this.x = x;
 		this.y = y;
-		this.width = 5;
-		this.height = 10;
+		this.width = 10;
+		this.height = 20;
 		this.xVelocity = 0;
 		this.yVelocity = 0;
 	}
