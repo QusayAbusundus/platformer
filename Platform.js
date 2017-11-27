@@ -10,7 +10,7 @@ class Platform
 
 	contains(givenX, givenY)
 	{
-		return this.x > givenX && this.x + this.width < givenX && this.y > givenY && givenY < this.y + this. height;
+		return givenX > this.x && givenX < this.x + this.width && givenY > this.y && givenY < this.y + this.height;
 	}
 
 	show()

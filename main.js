@@ -1,11 +1,13 @@
 let john;
 let platforms = [];
 let score = 0;
+let bg;
 
 function setup()
 {
+	bg = loadImage("https://cdn.glitch.com/454cac07-3967-4615-ad84-39f4e0a1e10c%2Fplatformerbg.jpg?1511807719259");
 	createCanvas(1000, 800);
-	john = new Hero(300, 185);
+	john = new Hero(300, 150);
 	for(i = 0; i < 2; i++)
 	{
 		let x = 260;
@@ -17,10 +19,11 @@ function setup()
 
 function draw()
 {
-	background(0);
+	background(bg);
 	john.show();
 	john.move();
 	john.falling(height+4);
+	john.horizScreenWrap(0, width);
 	for(i = 0; i < platforms.length; i++)
 	{
 		platforms[i].show();

@@ -8,6 +8,10 @@ class Hero
 		this.height = 20;
 		this.xVelocity = 0;
 		this.yVelocity = 0;
+		this.gravity = 0.2;
+		this.walkingAccel = 0.2;
+		this.terminalVelocity = 5;
+		this.maxWalkingSpeed = 10;
 	}
 	
 	falling(floor)
@@ -16,6 +20,18 @@ class Hero
 		{
 			this.y = 0;
 			score--;
+		}
+	}
+	
+	horizScreenWrap(edgeLeft, edgeRight)
+	{
+		if(this.x == edgeLeft)
+		{
+			this.x = edgeRight;
+		}
+		else if(this.x == edgeRight)
+		{
+			this.x = edgeLeft;
 		}
 	}
 
@@ -32,20 +48,16 @@ class Hero
 		else
 		{
 			this.xVelocity = 0;
-		}
-		if(keyIsDown(UP_ARROW))
-		{
-			this.yVelocity = -5;
-		}
-		else
-		{
-			this.yVelocity = 0;
-		}
+		}		
 		for(let i = 0; i < platforms.length; i++)
 		{
-			if(platforms[i].contains(this.x, this.y) == false)
+			if(keyIsDown(UP_ARROW))
 			{
-				this.yVelocity = 5;
+				this.yVelocity = -5;
+			}
+			else if(platforms[i].contains(this.x, this.y + 10) == false && this.yVelocity != this.terminalVelocity)
+			{
+				this.yVelocity += this.gravity;
 			}
 			else
 			{
