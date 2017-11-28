@@ -8,14 +8,20 @@ class Platform
 		this.height = 20;
 	}
 
-	contains(givenX, givenY)
+	standing(givenX, givenY)
 	{
 		return givenX > this.x && givenX < this.x + this.width && givenY > this.y && givenY < this.y + this.height;
 	}
+	
+	//touchingWall(givenX, givenY)
+	//{
+	//	return givenX
+	//}
 
 	show()
 	{
-		fill(125);
+		fill(125, 0);
+		noStroke();
 		rect(this.x, this.y, this.width, this.height);
 	}
 }

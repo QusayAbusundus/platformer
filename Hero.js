@@ -10,7 +10,7 @@ class Hero
 		this.yVelocity = 0;
 		this.gravity = 0.2;
 		this.walkingAccel = 0.2;
-		this.terminalVelocity = 5;
+		this.terminalVelocity = 20;
 		this.maxWalkingSpeed = 10;
 	}
 	
@@ -36,7 +36,30 @@ class Hero
 	}
 
 	move()
-	{
+	{	
+		for(let i = 0; i < platforms.length; i++)
+		{
+			if(platforms[i].standing(this.x, this.y + 10)) //On Platform
+			{
+				//Nothing happening
+				this.yVelocity = 0;
+				
+				//Jumping
+				if(keyIsDown(UP_ARROW))
+				{
+					this.yVelocity = -6;
+				}
+			}
+			else if(platforms[i].standing(this.x, this.y + 10) == false) //Not on Platform
+			{
+				//Falling
+				if(this.yVelocity <= this.terminalVelocity)
+				{
+					this.yVelocity += this.gravity;					
+				}
+			}
+		}
+		
 		if(keyIsDown(LEFT_ARROW))
 		{
 			this.xVelocity = -5;
@@ -48,22 +71,7 @@ class Hero
 		else
 		{
 			this.xVelocity = 0;
-		}		
-		for(let i = 0; i < platforms.length; i++)
-		{
-			if(keyIsDown(UP_ARROW))
-			{
-				this.yVelocity = -5;
-			}
-			else if(platforms[i].contains(this.x, this.y + 10) == false && this.yVelocity != this.terminalVelocity)
-			{
-				this.yVelocity += this.gravity;
-			}
-			else
-			{
-				this.yVelocity = 0;
-			}
-		}
+		}	
 		
 		this.x += this.xVelocity;
 		this.y += this.yVelocity;
