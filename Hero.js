@@ -11,7 +11,8 @@ class Hero
 		this.gravity = 0.2;
 		this.walkingAccel = 0.2;
 		this.terminalVelocity = 20;
-		this.maxWalkingSpeed = 10;
+		this.maxRWalkingSpeed = 10;
+		this.maxLWalkingSpeed = -10;
 	}
 	
 	falling(floor)
@@ -60,13 +61,13 @@ class Hero
 			}
 		}
 		
-		if(keyIsDown(LEFT_ARROW))
+		if(keyIsDown(LEFT_ARROW) && this.xVelocity >= this.maxLWalkingSpeed)
 		{
-			this.xVelocity = -5;
+			this.xVelocity -= this.walkingAccel;
 		}
-		else if(keyIsDown(RIGHT_ARROW))
+		else if(keyIsDown(RIGHT_ARROW) && this.xVelocity <= this.maxRWalkingSpeed)
 		{
-			this.xVelocity = 5;
+			this.xVelocity += this.walkingAccel;
 		}
 		else
 		{
@@ -80,6 +81,7 @@ class Hero
 	show()
 	{
 		fill(255);
+		stroke(0);
 		ellipse(this.x, this.y, this.width, this.height);
 	}
 }
