@@ -8,7 +8,7 @@ class Platform
 		this.height = 20;
 	}
 
-	standing(givenX, givenY)
+	contains(givenX, givenY)
 	{
 		return givenX > this.x && givenX < this.x + this.width && givenY > this.y && givenY < this.y + this.height;
 	}
@@ -20,7 +20,7 @@ class Platform
 
 	show()
 	{
-		fill(125, 0);
+		fill(125);
 		noStroke();
 		rect(this.x, this.y, this.width, this.height);
 	}
