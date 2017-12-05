@@ -26,7 +26,7 @@ function draw()
 	background(bg);
 	john.show();
 	john.move();
-	john.falling(height+4);
+	john.falling(height);
 	john.horizScreenWrap(0, width);
 	for(i = 0; i < platforms.length; i++)
 	{

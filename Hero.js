@@ -8,7 +8,7 @@ class Hero
 		this.height = 20;
 		this.xVelocity = 0;
 		this.yVelocity = 0;
-		this.gravity = 0.2;
+		this.gravity = 0.6;
 		this.walkingAccel = 0.2;
 		this.terminalVelocity = 20;
 		this.maxRWalkingSpeed = 5;
@@ -48,26 +48,23 @@ class Hero
 
 	move()
 	{	
-		for(let i = 0; i < platforms.length; i++)
+		if(this.touchPlat()) //On Platform
 		{
-			if(this.touchPlat()) //On Platform
+			//Nothing happening
+			this.yVelocity = 0;
+			
+			//Jumping
+			if(keyIsDown(UP_ARROW))
 			{
-				//Nothing happening
-				this.yVelocity = 0;
-				
-				//Jumping
-				if(keyIsDown(UP_ARROW))
-				{
-					this.yVelocity = -10;
-				}
+				this.yVelocity = -10;
 			}
-			else if(this.touchPlat() == false) //Not on Platform
+		}
+		else if(this.touchPlat() == false) //Not on Platform
+		{
+			//Falling
+			if(this.yVelocity <= this.terminalVelocity)
 			{
-				//Falling
-				if(this.yVelocity <= this.terminalVelocity)
-				{
-					this.yVelocity += this.gravity;					
-				}
+				this.yVelocity += this.gravity;					
 			}
 		}
 		
@@ -79,6 +76,10 @@ class Hero
 		{
 			this.xVelocity += this.walkingAccel;
 		}
+		else if(keyIsPressed == false)
+		{
+			this.xVelocity = 0;
+		}
 		else if(this.xVelocity >= 0)
 		{
 			this.xVelocity -= this.walkingAccel;
@@ -86,10 +87,6 @@ class Hero
 		else if(this.xVelocity <= 0)
 		{
 			this.xVelocity += this.walkingAccel;
-		}
-		else if(keyPressed() == false)
-		{
-			this.xVelocity = 0;
 		}
 		
 		this.x += this.xVelocity;
