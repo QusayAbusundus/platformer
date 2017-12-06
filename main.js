@@ -16,8 +16,8 @@ function setup()
 	{
 		let x = 120;
 		let y = 699;
-		let width = 720;
-		platforms[i] = new Platform(x, y, width);
+		let platWidth = 720;
+		platforms[i] = new Platform(x, y, platWidth);
 	}
 }
 

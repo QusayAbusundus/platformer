@@ -10,9 +10,10 @@ class Hero
 		this.yVelocity = 0;
 		this.gravity = 0.6;
 		this.walkingAccel = 0.2;
+		this.slowingAccel = 0.6;
 		this.terminalVelocity = 20;
-		this.maxRWalkingSpeed = 5;
-		this.maxLWalkingSpeed = -5;
+		this.maxRWalkingSpeed = 100;
+		this.maxLWalkingSpeed = -this.maxRWalkingSpeed;
 	}
 	
 	falling(floor)
@@ -26,11 +27,11 @@ class Hero
 	
 	horizScreenWrap(edgeLeft, edgeRight)
 	{
-		if(this.x == edgeLeft)
+		if(this.x <= edgeLeft)
 		{
 			this.x = edgeRight;
 		}
-		else if(this.x == edgeRight)
+		else if(this.x >= edgeRight)
 		{
 			this.x = edgeLeft;
 		}
@@ -41,10 +42,29 @@ class Hero
 		for(let i = 0; i < platforms.length; i++)
 		{
 			if(platforms[i].contains(this.x, this.y + 10))
+			{
+				this.y = platforms[i].y - 10.5;
 				return true;
+			}
 		}
 		return false;
 	}
+	
+	/* slowDown()
+	{
+		if(this.xVelocity >= 0.25)
+		{
+			this.xVelocity -= this.walkingAccel
+		}
+		else if(this.xVelocity <= -0.25)
+		{
+			this.xVelocity += this.walkingAccel
+		}
+		else
+		{
+			this.xVelocity = 0;
+		}
+	} */
 
 	move()
 	{	
@@ -57,7 +77,7 @@ class Hero
 			if(keyIsDown(UP_ARROW))
 			{
 				this.yVelocity = -10;
-			}
+			}		
 		}
 		else if(this.touchPlat() == false) //Not on Platform
 		{
@@ -70,23 +90,37 @@ class Hero
 		
 		if(keyIsDown(LEFT_ARROW) && this.xVelocity >= this.maxLWalkingSpeed)
 		{
-			this.xVelocity -= this.walkingAccel;
+			if(this.xVelocity <= 0)
+			{
+				this.xVelocity -= this.walkingAccel;
+			}
+			else
+			{
+				this.xVelocity -= this.slowingAccel;
+			}
 		}
 		else if(keyIsDown(RIGHT_ARROW) && this.xVelocity <= this.maxRWalkingSpeed)
 		{
-			this.xVelocity += this.walkingAccel;
+			if(this.xVelocity >= 0)
+			{
+				this.xVelocity += this.walkingAccel;
+			}
+			else
+			{
+				this.xVelocity += this.slowingAccel;
+			}
 		}
-		else if(keyIsPressed == false)
+		else if(this.xVelocity >= 0.25)
+		{
+			this.xVelocity -= this.slowingAccel
+		}
+		else if(this.xVelocity <= -0.25)
+		{
+			this.xVelocity += this.slowingAccel
+		}
+		else
 		{
 			this.xVelocity = 0;
-		}
-		else if(this.xVelocity >= 0)
-		{
-			this.xVelocity -= this.walkingAccel;
-		}
-		else if(this.xVelocity <= 0)
-		{
-			this.xVelocity += this.walkingAccel;
 		}
 		
 		this.x += this.xVelocity;
