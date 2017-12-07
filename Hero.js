@@ -4,16 +4,19 @@ class Hero
 	{
 		this.x = x;
 		this.y = y;
-		this.width = 10;
-		this.height = 20;
+		this.heroWidth = 70;
+		this.heroHeight = 50;
 		this.xVelocity = 0;
 		this.yVelocity = 0;
 		this.gravity = 0.6;
 		this.walkingAccel = 0.2;
 		this.slowingAccel = 0.6;
 		this.terminalVelocity = 20;
-		this.maxRWalkingSpeed = 100;
+		this.maxRWalkingSpeed = 10;
 		this.maxLWalkingSpeed = -this.maxRWalkingSpeed;
+		this.sprite = loadImage("https://cdn.glitch.com/669b7e75-b563-4deb-8e12-503a6c6fb422%2FKid_Running_Right.png?1512671362787")
+		this.spriteRight = loadImage("https://cdn.glitch.com/669b7e75-b563-4deb-8e12-503a6c6fb422%2FKid_Running_Right.png?1512671362787")
+		this.spriteLeft = loadImage("https://cdn.glitch.com/669b7e75-b563-4deb-8e12-503a6c6fb422%2FKid_Running_Left.png?1512671678662")
 	}
 	
 	falling(floor)
@@ -131,6 +134,6 @@ class Hero
 	{
 		fill(255);
 		stroke(0);
-		ellipse(this.x, this.y, this.width, this.height);
+		image(this.sprite, this.x, this.y-40, this.heroWidth, this.heroHeight);
 	}
 }
