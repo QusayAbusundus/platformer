@@ -5,7 +5,7 @@ let bg;
 
 function preload()
 {
-	bg = loadImage("https://cdn.glitch.com/454cac07-3967-4615-ad84-39f4e0a1e10c%2Fplatformerbg.jpg?1511807719259");
+	bg = loadImage("https://www.metoffice.gov.uk/binaries/content/gallery/mohippo/images/migrated-image/j/cumulus_1.jpg");
 }
 
 function setup()

@@ -46,29 +46,13 @@ class Hero
 		{
 			if(platforms[i].contains(this.x, this.y + 10))
 			{
-				this.y = platforms[i].y - 10.5;
+				this.y = platforms[i].y - 9;
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	/* slowDown()
-	{
-		if(this.xVelocity >= 0.25)
-		{
-			this.xVelocity -= this.walkingAccel
-		}
-		else if(this.xVelocity <= -0.25)
-		{
-			this.xVelocity += this.walkingAccel
-		}
-		else
-		{
-			this.xVelocity = 0;
-		}
-	} */
-
 	move()
 	{	
 		if(this.touchPlat()) //On Platform
@@ -93,6 +77,7 @@ class Hero
 		
 		if(keyIsDown(LEFT_ARROW) && this.xVelocity >= this.maxLWalkingSpeed)
 		{
+			this.sprite = this.spriteLeft;
 			if(this.xVelocity <= 0)
 			{
 				this.xVelocity -= this.walkingAccel;
@@ -104,6 +89,7 @@ class Hero
 		}
 		else if(keyIsDown(RIGHT_ARROW) && this.xVelocity <= this.maxRWalkingSpeed)
 		{
+			this.sprite = this.spriteRight;
 			if(this.xVelocity >= 0)
 			{
 				this.xVelocity += this.walkingAccel;
@@ -134,6 +120,6 @@ class Hero
 	{
 		fill(255);
 		stroke(0);
-		image(this.sprite, this.x, this.y-40, this.heroWidth, this.heroHeight);
+		image(this.sprite, this.x-45, this.y-40, this.heroWidth, this.heroHeight);
 	}
 }
