@@ -5,13 +5,13 @@ let bg;
 
 function preload()
 {
-	bg = loadImage("https://www.metoffice.gov.uk/binaries/content/gallery/mohippo/images/migrated-image/j/cumulus_1.jpg");
+	bg = loadImage("https://cdn.glitch.com/56625ea6-0aa3-462f-b047-1dee20d77e4e%2Fcumulus_1.jpg?1513015392362");
 }
 
 function setup()
 {
 	createCanvas(1000, 800);
-	john = new Hero(300, 550);
+	john = new Hero(50, 50);
 	for(i = 0; i < 10; i++)
 	{
 		let x = 120;
@@ -24,17 +24,27 @@ function setup()
 function draw()
 {
 	background(bg);
-	john.show();
-	john.move();
-	john.falling(height);
-	john.horizScreenWrap(0, width);
 	for(i = 0; i < platforms.length; i++)
 	{
 		platforms[i].show();
 	}
-	if(john.y > height)
-		score--;
+	john.show();
+	john.move();
+	john.ScreenWrap(0, width, height, 0);
 	drawScore();
+}
+
+function resetPlatform()
+{
+	platforms = []; 
+	for(i = 0; i < 10; i++)
+	{
+		let x = random(width);
+		let y = random(height);
+		let platWidth = random(100, 500);
+		platforms[i] = new Platform(x, y, platWidth);
+	}
+	
 }
 
 function drawScore()

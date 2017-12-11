@@ -5,7 +5,7 @@ class Platform
 		this.x = x;
 		this.y = y;
 		this.width = width;
-		this.height = 20;
+		this.height = 40;
 	}
 
 	contains(givenX, givenY)

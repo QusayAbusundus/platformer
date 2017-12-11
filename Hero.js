@@ -12,6 +12,7 @@ class Hero
 		this.walkingAccel = 0.2;
 		this.slowingAccel = 0.6;
 		this.terminalVelocity = 20;
+		this.jumpingHeight = 15;
 		this.maxRWalkingSpeed = 10;
 		this.maxLWalkingSpeed = -this.maxRWalkingSpeed;
 		this.sprite = loadImage("https://cdn.glitch.com/669b7e75-b563-4deb-8e12-503a6c6fb422%2FKid_Running_Right.png?1512671362787")
@@ -19,24 +20,29 @@ class Hero
 		this.spriteLeft = loadImage("https://cdn.glitch.com/669b7e75-b563-4deb-8e12-503a6c6fb422%2FKid_Running_Left.png?1512671678662")
 	}
 	
-	falling(floor)
-	{
-		if(this.y > floor)
-		{
-			this.y = 0;
-			score--;
-		}
-	}
 	
-	horizScreenWrap(edgeLeft, edgeRight)
+	ScreenWrap(edgeLeft, edgeRight, floor, ceiling)
 	{
 		if(this.x <= edgeLeft)
 		{
 			this.x = edgeRight;
+			resetPlatform();
 		}
 		else if(this.x >= edgeRight)
 		{
 			this.x = edgeLeft;
+			resetPlatform();
+		}
+		if(this.y >= floor)
+		{
+			this.y = 0;
+			score--;
+			resetPlatform();
+		}
+		else if(this. y <= ceiling)
+		{
+			this.y = floor
+			resetPlatform();
 		}
 	}
 	
@@ -46,9 +52,18 @@ class Hero
 		{
 			if(platforms[i].contains(this.x, this.y + 10))
 			{
-				this.y = platforms[i].y - 9;
-				return true;
+				if(this.y > (platforms[i].y + (platforms[i].height/2)))
+				{
+					this.yVelocity = 0;
+					return false;
+				}
+				else
+				{
+					this.y = platforms[i].y - 9;
+					return true;
+				}				
 			}
+
 		}
 		return false;
 	}
@@ -63,7 +78,7 @@ class Hero
 			//Jumping
 			if(keyIsDown(UP_ARROW))
 			{
-				this.yVelocity = -10;
+				this.yVelocity = -this.jumpingHeight;
 			}		
 		}
 		else if(this.touchPlat() == false) //Not on Platform
