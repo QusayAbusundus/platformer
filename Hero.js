@@ -11,7 +11,6 @@ class Hero
 		this.gravity = 0.6;
 		this.walkingAccel = 0.2;
 		this.slowingAccel = 0.6;
-		this.terminalVelocity = 20;
 		this.jumpingHeight = 15;
 		this.maxRWalkingSpeed = 10;
 		this.maxLWalkingSpeed = -this.maxRWalkingSpeed;
@@ -21,7 +20,7 @@ class Hero
 	}
 	
 	
-	ScreenWrap(edgeLeft, edgeRight, floor, ceiling)
+	ScreenWrap(edgeLeft, edgeRight, floor)
 	{
 		if(this.x <= edgeLeft)
 		{
@@ -37,11 +36,6 @@ class Hero
 		{
 			this.y = 0;
 			score--;
-			resetPlatform();
-		}
-		else if(this. y <= ceiling)
-		{
-			this.y = floor
 			resetPlatform();
 		}
 	}
@@ -84,9 +78,9 @@ class Hero
 		else if(this.touchPlat() == false) //Not on Platform
 		{
 			//Falling
-			if(this.yVelocity <= this.terminalVelocity)
+			if(this.yVelocity <= terminalVelocity)
 			{
-				this.yVelocity += this.gravity;					
+				this.yVelocity += gravity;					
 			}
 		}
 		
