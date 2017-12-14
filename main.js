@@ -1,5 +1,6 @@
 let john;
 let platforms = [];
+let coins = [];
 let gravity = 0.6;
 let terminalVelocity = 20;
 let score = 0;
@@ -23,12 +24,23 @@ function setup()
 		let y = i * 100 + 100;
 		let platWidth = 200;
 		platforms[i] = new Platform(x, y, platWidth);
+		for(j = 0; j < 3; j++)
+		{
+			let coinX = random(platforms[i].x, platforms[i].width);
+			let coinY = platforms[i].y;
+			coins = new Coin(coinX, coinY);
+		}
 	}
+	
 }
 
 function draw()
 {
 	background(bg);
+	for(i = 0; i < coins.length; i++)
+	{
+		coins[i].show();
+	}
 	for(i = 0; i < platforms.length; i++)
 	{
 		platforms[i].show();
@@ -49,7 +61,8 @@ function clockTimer()
 
 function resetPlatform()
 {
-	platforms = []; 
+	platforms = [];
+	coins = [];
 	platforms[0] = new Platform(0, 600, random(100, 500))
 	for(i = 1; i < 9; i++)
 	{
@@ -57,7 +70,14 @@ function resetPlatform()
 		let y = random(platforms[i-1].y - 125, platforms[i-1].y - 200);
 		let platWidth = random(100, 500);
 		platforms[i] = new Platform(x, y, platWidth);
+		for(j = 0; j < 3; j++)
+		{
+			let coinX = random(platforms[i].x, platforms[i].width);
+			let coinY = platforms[i].y;
+			coins = new Coin(coinX, coinY);
+		}
 	}
+	
 	platforms[9] = new Platform(800, 600, 300)
 }
 
