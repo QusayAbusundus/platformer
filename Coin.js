@@ -4,7 +4,7 @@ class Coin
 	{
 		this.x = x;
 		this.y = y;
-		this.radius = 40;
+		this.radius = 10;
 	}
 	contains(givenX, givenY)
 	{
@@ -14,7 +14,7 @@ class Coin
 	
 	show()
 	{
-		fill ("Yellow");
+		fill("Yellow");
 		noStroke();
 		ellipse(this.x, this.y, this.radius*2, this.radius*2);
 	}

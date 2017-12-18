@@ -26,9 +26,9 @@ function setup()
 		platforms[i] = new Platform(x, y, platWidth);
 		for(j = 0; j < 3; j++)
 		{
-			let coinX = random(platforms[i].x, platforms[i].width);
-			let coinY = platforms[i].y;
-			coins = new Coin(coinX, coinY);
+			let coinX = random(platforms[i].x, platWidth+platforms[i].x);
+			let coinY = platforms[i].y-10;
+			coins.push(new Coin(coinX, coinY));
 		}
 	}
 	
@@ -36,19 +36,35 @@ function setup()
 
 function draw()
 {
-	background(bg);
-	for(i = 0; i < coins.length; i++)
+	if(gameState == 0)
 	{
-		coins[i].show();
+		background(bg);
+		titleScreen();
+		if(keyIsDown(32))
+		{
+			gameState = 1
+		}
 	}
-	for(i = 0; i < platforms.length; i++)
+	else if(gameState == 1)
 	{
-		platforms[i].show();
+		background(bg);
+		drawScore();
+		for(i = 0; i < coins.length; i++)
+		{
+			coins[i].show();
+		}
+		for(i = 0; i < platforms.length; i++)
+		{
+			platforms[i].show();
+		}
+		john.show();
+		john.move();
+		john.ScreenWrap(0, width, height, 0);
 	}
-	john.show();
-	john.move();
-	john.ScreenWrap(0, width, height, 0);
-	drawScore();
+	else if(gameState == 2)
+	{
+		
+	}		
 }
 
 function clockTimer()
@@ -57,6 +73,16 @@ function clockTimer()
 	{
 		timer--;
 	}
+}
+
+function titleScreen()
+{
+	fill(255, 0, 0);
+	textSize(64);
+	textAlign(CENTER);
+	text("Not IWBTGtm!", width/2, height/2);
+	textSize(32);
+	text("Press the space key to start", width/2, height/2 + 30);
 }
 
 function resetPlatform()
@@ -70,11 +96,11 @@ function resetPlatform()
 		let y = random(platforms[i-1].y - 125, platforms[i-1].y - 200);
 		let platWidth = random(100, 500);
 		platforms[i] = new Platform(x, y, platWidth);
-		for(j = 0; j < 3; j++)
+		for(j = 0; j < 1; j++)
 		{
-			let coinX = random(platforms[i].x, platforms[i].width);
+			let coinX = random(platforms[i].x, platWidth);
 			let coinY = platforms[i].y;
-			coins = new Coin(coinX, coinY);
+			coins.push(new Coin(coinX, coinY));
 		}
 	}
 	
@@ -85,6 +111,6 @@ function drawScore()
 {
 	fill(255);
 	textSize(32);
-	text("Score: " + score, 5, 30)
-	text("Timer: " + timer, 5, 60)
+	text("Score: " + score, 68, 35)
+	text("Timer: " + timer, 84, 70)
 }
