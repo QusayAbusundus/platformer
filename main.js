@@ -60,6 +60,7 @@ function draw()
 		john.show();
 		john.move();
 		john.ScreenWrap(0, width, height, 0);
+		john.collectCoin();
 	}
 	else if(gameState == 2)
 	{
@@ -69,7 +70,7 @@ function draw()
 
 function clockTimer()
 {
-	if(timer > 0)
+	if(timer > 0 && gameState == 1)
 	{
 		timer--;
 	}
@@ -98,8 +99,8 @@ function resetPlatform()
 		platforms[i] = new Platform(x, y, platWidth);
 		for(j = 0; j < 1; j++)
 		{
-			let coinX = random(platforms[i].x, platWidth);
-			let coinY = platforms[i].y;
+			let coinX = random(platforms[i].x, platWidth+platforms[i].x);
+			let coinY = platforms[i].y-10;
 			coins.push(new Coin(coinX, coinY));
 		}
 	}

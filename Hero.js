@@ -30,6 +30,7 @@ class Hero
 		else if(this.x >= edgeRight)
 		{
 			this.x = edgeLeft;
+			score++;
 			resetPlatform();
 		}
 		if(this.y >= floor)
@@ -60,6 +61,18 @@ class Hero
 
 		}
 		return false;
+	}
+	
+	collectCoin()
+	{
+		for(let i = 0; i < coins.length; i++)
+		{
+			if(coins[i].contains(this.x, this.y + 5))
+			{
+				coins.splice(i, 1)
+				score++;
+			}
+		}
 	}
 	
 	move()
